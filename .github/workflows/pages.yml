@@ -4,79 +4,43 @@ on:
   push:
     branches:
       - main
-  pull_request:
   workflow_dispatch:
 
 permissions:
   contents: read
-
-env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+  pages: write
+  id-token: write
 
 concurrency:
-  group: pages-${{ github.ref }}
-  cancel-in-progress: true
+  group: pages
+  cancel-in-progress: false
 
 jobs:
-  validate:
+  publish:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-
-      - name: Setup Node
-        uses: actions/setup-node@v6
-        with:
-          node-version: 24
-          package-manager-cache: false
-
-      - name: Validate static site
-        run: npm test
-
-  deploy:
-    if: github.event_name != 'pull_request'
-    needs: validate
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      pages: write
-      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
 
-      - name: Ensure GitHub Pages is enabled
-        env:
-          GH_TOKEN: ${{ secrets.PAGES_TOKEN || github.token }}
-        run: |
-          set -euo pipefail
-          if build_type="$(gh api "repos/${GITHUB_REPOSITORY}/pages" --jq '.build_type' 2>/dev/null)"; then
-            if [ "${build_type}" = "workflow" ]; then
-              echo "GitHub Pages is already configured for GitHub Actions deployments."
-            else
-              echo "GitHub Pages is enabled with build type '${build_type}'; switching it to GitHub Actions deployments."
-              gh api \
-                --method PUT \
-                "repos/${GITHUB_REPOSITORY}/pages" \
-                -f build_type=workflow >/dev/null
-            fi
-          else
-            echo "GitHub Pages is not enabled; enabling it for GitHub Actions deployments."
-            gh api \
-              --method POST \
-              "repos/${GITHUB_REPOSITORY}/pages" \
-              -f build_type=workflow >/dev/null
-          fi
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Validate static site
+        run: npm test
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
 
       - name: Upload static site
-        uses: actions/upload-pages-artifact@v5
+        uses: actions/upload-pages-artifact@v3
         with:
           path: public
-          include-hidden-files: true
 
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v5
+        uses: actions/deploy-pages@v4

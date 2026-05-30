@@ -148,17 +148,17 @@ a { color: inherit; }
   text-transform: uppercase;
 }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 2rem; }
-.highlight-card, .panel, .card, .service-grid article, .cta-panel {
+.event-card, .panel, .card, .agenda article, .cta-panel {
   background: var(--white);
   border: 1px solid rgb(13 43 69 / 10%);
   border-radius: 1.5rem;
   box-shadow: var(--shadow);
   padding: 1.5rem;
 }
-.highlight-card {
+.event-card {
   background: linear-gradient(180deg, var(--white), #eef7ff);
 }
-.highlight-card h2, .card h3, .panel h3, .service-grid h3, .cta-panel h3 { color: var(--navy); margin-top: 0; }
+.event-card h2, .card h3, .panel h3, .agenda h3, .cta-panel h3 { color: var(--navy); margin-top: 0; }
 dl { margin: 0; }
 dl div { border-top: 1px solid rgb(13 43 69 / 10%); padding: 1rem 0; }
 dt { color: var(--muted); font-size: 0.8rem; font-weight: 800; text-transform: uppercase; }
@@ -183,43 +183,43 @@ dd { margin: 0.25rem 0 0; }
 .card { box-shadow: none; }
 .card.accent { border-top: 0.45rem solid var(--gold); }
 .card p { color: var(--muted); margin-bottom: 0; }
-.service-grid {
+.agenda {
   display: grid;
   gap: 1rem;
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
-.service-grid ul, .check-list, .deliverable-list {
+.agenda ul, .check-list, .hotel-list {
   list-style: none;
   margin: 0;
   padding: 0;
 }
-.service-grid li {
+.agenda li {
   border-top: 1px solid rgb(13 43 69 / 10%);
   display: grid;
   gap: 0.75rem;
   grid-template-columns: 4rem 1fr;
   padding: 0.85rem 0;
 }
-.service-number { color: var(--blue); font-weight: 900; }
-.option-strip {
+time { color: var(--blue); font-weight: 900; }
+.speaker-strip {
   display: grid;
   gap: 1rem;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   margin-top: 1rem;
 }
-.option-strip article {
+.speaker-strip article {
   background: var(--navy);
   border-radius: 1rem;
   color: var(--white);
   padding: 1rem;
 }
-.option-strip span, .deliverable-list span { display: block; opacity: 0.74; }
+.speaker-strip span, .hotel-list span { display: block; opacity: 0.74; }
 .split {
   display: grid;
   gap: 1rem;
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
-.check-list li, .deliverable-list li {
+.check-list li, .hotel-list li {
   border-top: 1px solid rgb(13 43 69 / 10%);
   padding: 0.9rem 0 0.9rem 1.8rem;
   position: relative;
@@ -286,7 +286,7 @@ dd { margin: 0.25rem 0 0; }
     top: 5.2rem;
   }
   .nav-links[data-open="true"] { display: flex; }
-  .hero, .service-grid, .split, .four-up, .three-up, .option-strip, .logo-row { grid-template-columns: 1fr; }
+  .hero, .agenda, .split, .four-up, .three-up, .speaker-strip, .logo-row { grid-template-columns: 1fr; }
   .hero { min-height: auto; padding-top: 4rem; }
 }
 @media (max-width: 560px) {
