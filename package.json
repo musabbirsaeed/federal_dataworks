@@ -1,0 +1,15 @@
+{
+  "name": "federal-dataworks-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Publish-ready static website for the Federal DataWorks consultancy.",
+  "scripts": {
+    "test": "node scripts/check-site.mjs"
+  },
+  "keywords": [
+    "dataworks",
+    "federal",
+    "static-site"
+  ],
+  "license": "MIT"
+}
