@@ -2,8 +2,9 @@
   "name": "federal-dataworks-website",
   "version": "1.0.0",
   "private": true,
-  "description": "Publish-ready static website for the Federal DATAWorks workshop.",
+  "description": "Static website for the Federal DATAWorks workshop.",
   "scripts": {
+    "start": "python3 -m http.server 4173 --directory public",
     "test": "node scripts/check-site.mjs"
   },
   "keywords": [
